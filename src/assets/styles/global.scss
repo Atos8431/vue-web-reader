@@ -1,0 +1,41 @@
+@import 'reset';
+
+// 1rem = fontSize px
+// 1px = (1 / fontSize)rem
+/*
+该处默认fontsize大小为37.5，但是实际是动态计算得出的；$px是参数，用来接收px的大小；
+该函数的作用就是接收一个px参数，然后通过自己设定的fontsize大小来计算得出rem，再返回
+*/
+$fontSize: 37.5;
+@function px2rem($px){
+  @return ($px / $fontSize) + rem;
+}
+
+@mixin  center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// 写在reset中不生效
+.icon {
+  color: #333;
+  font-size: px2rem(20);
+}
+.slide-down-enter,.slide-down-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+.slide-down-enter-to,.slide-down-leave,.slide-up-enter-to,.slide-up-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-down-enter-active,.slide-down-leave-active,.slide-up-enter-active,.slide-up-leave-active {
+  transition: all 0.3s linear;
+}
+.slide-up-enter,.slide-up-leave-to {
+  transform: translate3d(0, px2rem(108), 0);
+}
+.fade-enter, .fade-leaver-to {
+  opacity: 0;
+}
+.fade-enter-to, .fade-leaver {
+  opacity: 1;
+}
